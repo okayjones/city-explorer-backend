@@ -12,6 +12,7 @@ The back-end for the City Explorer site, allowing users to search for a city and
 
 - git clone
 - `npm install` to install depdendencies
+- `node server.js` to start the server on port 3000 
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
