@@ -34,8 +34,8 @@ The back-end for the City Explorer site, allowing users to search for a city and
 Number and name of feature: #1 - Repo Setup
 Estimate of time needed to complete: 30m
 Start time: 9:45am
-Finish time:
-Actual time needed to complete:
+Finish time: 10:10am
+Actual time needed to complete: 25m
 
 #### Feature #2
 
