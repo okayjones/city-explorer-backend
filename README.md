@@ -12,6 +12,7 @@ The back-end for the City Explorer site, allowing users to search for a city and
 
 - git clone
 - `npm install` to install depdendencies
+- `node server.js` to start the server on port 3000 
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
@@ -40,10 +41,10 @@ Actual time needed to complete: 25m
 #### Feature #2
 
 Number and name of feature: #2 - Locations
-Estimate of time needed to complete:
-Start time:
-Finish time:
-Actual time needed to complete:
+Estimate of time needed to complete: 1hr
+Start time: 10:15am
+Finish time: 11:00am
+Actual time needed to complete: 45m
 
 #### Feature #3
 
