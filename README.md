@@ -43,8 +43,8 @@ Actual time needed to complete: 25m
 Number and name of feature: #2 - Locations
 Estimate of time needed to complete: 1hr
 Start time: 10:15am
-Finish time:
-Actual time needed to complete:
+Finish time: 11:00am
+Actual time needed to complete: 45m
 
 #### Feature #3
 
