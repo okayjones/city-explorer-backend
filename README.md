@@ -57,7 +57,7 @@ Actual time needed to complete: 30m
 #### Feature #4
 
 Number and name of feature: #4 - Errors
-Estimate of time needed to complete:
-Start time:
-Finish time:
-Actual time needed to complete:
+Estimate of time needed to complete: 45m
+Start time: 6pm
+Finish time: 6:47pm
+Actual time needed to complete: ~45m
