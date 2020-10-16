@@ -17,11 +17,23 @@ app.get('/location', (request, response) => {
     const data = require('./data/location.json')[0];
     const city = request.query.city;
 
-    //call constructor
     const location = new Location(data, city);
-    
-    //send response
+
     response.send(location);
+});
+
+app.get('/weather', (request, response) => {
+    const data = require('./data/weather.json').data;
+    const city = request.query.city;
+
+    let weather = [];
+    
+    data.forEach(data => {
+        const day = new Weather(data);
+        weather.push(day);
+    });
+
+    response.send(weather);
 });
 
 
@@ -31,6 +43,11 @@ function Location(obj, query){ //location constructor
     this.latitude = obj.lat;
     this.longitude = obj.lon;
 };
+
+function Weather(obj){ //weather constructor
+    this.forecast = obj.weather.description;
+    this.time = obj.valid_date;
+}
 
 app.listen(PORT, () => {
     console.log(`Server now listening on port ${PORT}`);
