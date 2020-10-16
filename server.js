@@ -19,7 +19,7 @@ app.get('/location', (request, response) => {
 app.get('/weather', (request, response) => {
     const data = require('./data/weather.json').data;
     let weather = [];
-    data.forEach(data => weather.push(Weather(data)));
+    data.forEach(data => weather.push(new Weather(data)));
     response.send(weather);
 });
 
