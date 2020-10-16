@@ -49,10 +49,10 @@ Actual time needed to complete: 45m
 #### Feature #3
 
 Number and name of feature: #3 - Weather
-Estimate of time needed to complete:
-Start time:
-Finish time:
-Actual time needed to complete:
+Estimate of time needed to complete: 45m
+Start time: 3pm
+Finish time: 3:30pm
+Actual time needed to complete: 30m
 
 #### Feature #4
 
