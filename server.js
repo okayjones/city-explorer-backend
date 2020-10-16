@@ -46,7 +46,7 @@ function Location(obj, query){ //location constructor
 
 function Weather(obj){ //weather constructor
     this.forecast = obj.weather.description;
-    this.time = obj.valid_date;
+    this.time = new Date(obj.valid_date).toDateString();
 }
 
 app.listen(PORT, () => {
