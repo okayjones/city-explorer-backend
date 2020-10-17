@@ -1,45 +1,52 @@
 'use strict'
 
+// Dependencies
 const express = require('express');
 const cors = require('cors');
-const { response } = require('express');
+const superagent = require('superagent');
+
+// Environment 
 require('dotenv').config();
+
+// Setup application
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 
-
 // Routes
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
-
+app.use('*', notFoundHandler);
 
 // Handlers
-function handleLocation(request, response){
-    try {
-        const data = require('./data/location.json')[0];
-        const city = request.query.city;
-        const location = new Location(data, city);
-        response.send(location);
-    }
-    catch (error) {
-        handleError();
-    }
+function handleLocation(req, res){
+    let city = req.query.city;
+    let key = process.env.GEOCODE_API_KEY;
+    
+    const URL = `https://us1.locationiq.com/v1/search.php/?key=${key}&q=${city}&format=json`;
+    superagent.get(URL)
+        .then(data => {
+            let location = new Location(data.body[0], city);
+            res.status(200).json(location);
+        })
+        .catch(error => {
+            res.status(500).send("Sorry, something went wrong");
+        })
 };
 
-function handleWeather(request, response){
+function handleWeather(req, res){
     try {
         const data = require('./data/weather.json').data;
         let weather = data.map(day => new Weather(day));
-        response.send(weather);
+        res.send(weather);
     }
     catch (error) {
-        handleError();
+        res.status(500).send("Sorry, something went wrong");
     }
 };
 
-function handleError(){
-    return response.status(500).send("Sorry, something went wrong");
+function notFoundHandler(req, res){
+    res.status(404).send('Not Found');
 };
 
 // Constructors
