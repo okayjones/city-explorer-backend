@@ -30,15 +30,11 @@ The back-end for the City Explorer site, allowing users to search for a city and
 
 ### Lab 1
 
-#### Feature #1
-
 Number and name of feature: #1 - Repo Setup
 Estimate of time needed to complete: 30m
 Start time: 9:45am
 Finish time: 10:10am
 Actual time needed to complete: 25m
-
-#### Feature #2
 
 Number and name of feature: #2 - Locations
 Estimate of time needed to complete: 1hr
@@ -46,18 +42,40 @@ Start time: 10:15am
 Finish time: 11:00am
 Actual time needed to complete: 45m
 
-#### Feature #3
-
 Number and name of feature: #3 - Weather
 Estimate of time needed to complete: 45m
 Start time: 3pm
 Finish time: 3:30pm
 Actual time needed to complete: 30m
 
-#### Feature #4
-
 Number and name of feature: #4 - Errors
 Estimate of time needed to complete: 45m
 Start time: 6pm
 Finish time: 6:47pm
 Actual time needed to complete: ~45m
+
+## Lab 2
+
+Number and name of feature: #1 - Data formatting
+Estimate of time needed to complete: 15m
+Start time: 12:10pm
+Finish time:
+Actual time needed to complete:
+
+Number and name of feature: #2 - Locations
+Estimate of time needed to complete:
+Start time:
+Finish time:
+Actual time needed to complete:
+
+Number and name of feature: #3 - Weather
+Estimate of time needed to complete:
+Start time:
+Finish time:
+Actual time needed to complete:
+
+Number and name of feature: #4 - Trails
+Estimate of time needed to complete:
+Start time:
+Finish time:
+Actual time needed to complete:
