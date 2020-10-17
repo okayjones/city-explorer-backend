@@ -66,14 +66,14 @@ Actual time needed to complete: 5m
 Number and name of feature: #2 - Locations
 Estimate of time needed to complete: 45m
 Start time: 12:30pm
-Finish time:
-Actual time needed to complete:
+Finish time: 1:05pm
+Actual time needed to complete: 35m
 
 Number and name of feature: #3 - Weather
-Estimate of time needed to complete:
-Start time:
-Finish time:
-Actual time needed to complete:
+Estimate of time needed to complete: 45m
+Start time: 1:30pm
+Finish time: 2:20pm
+Actual time needed to complete: 50m
 
 Number and name of feature: #4 - Trails
 Estimate of time needed to complete:
