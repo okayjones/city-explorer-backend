@@ -30,23 +30,33 @@ function handleLocation(req, res){
             res.status(200).json(location);
         })
         .catch(error => {
-            res.status(500).send("Sorry, something went wrong");
+            errorHandler();
         })
 };
 
 function handleWeather(req, res){
-    try {
-        const data = require('./data/weather.json').data;
-        let weather = data.map(day => new Weather(day));
-        res.send(weather);
-    }
-    catch (error) {
-        res.status(500).send("Sorry, something went wrong");
-    }
+    let lat = req.query.latitude;
+    let lon = req.query.longitude;
+    let key = process.env.WEATHER_API_KEY;
+
+    const URL = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&days=8&key=${key}`;
+
+    superagent.get(URL)
+        .then(data => {
+            let weather = data.body.data.map(day => new Weather(day));
+            res.status(200).send(weather);
+        })
+        .catch(error => {
+            errorHandler(req, res);
+        });
 };
 
 function notFoundHandler(req, res){
     res.status(404).send('Not Found');
+};
+
+function errorHandler(req, res){
+    res.status(500).send("Sorry, something went wrong");
 };
 
 // Constructors
