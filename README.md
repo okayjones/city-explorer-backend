@@ -76,7 +76,7 @@ Finish time: 2:20pm
 Actual time needed to complete: 50m
 
 Number and name of feature: #4 - Trails
-Estimate of time needed to complete:
-Start time:
-Finish time:
-Actual time needed to complete:
+Estimate of time needed to complete: 1hr
+Start time: 2:30pm
+Finish time: 3pm
+Actual time needed to complete: 30m
