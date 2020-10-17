@@ -12,13 +12,14 @@ The back-end for the City Explorer site, allowing users to search for a city and
 
 - git clone
 - `npm install` to install depdendencies
-- `node server.js` to start the server on port 3000 
+- `node server.js` to start the server on port 3000
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
 ## Change Log
+
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource.
@@ -59,12 +60,12 @@ Actual time needed to complete: ~45m
 Number and name of feature: #1 - Data formatting
 Estimate of time needed to complete: 15m
 Start time: 12:10pm
-Finish time:
-Actual time needed to complete:
+Finish time: 12:15pm
+Actual time needed to complete: 5m
 
 Number and name of feature: #2 - Locations
-Estimate of time needed to complete:
-Start time:
+Estimate of time needed to complete: 45m
+Start time: 12:30pm
 Finish time:
 Actual time needed to complete:
 
