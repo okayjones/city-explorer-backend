@@ -9,6 +9,9 @@ const pg = require('pg');
 // Environment 
 require('dotenv').config();
 
+// Postgres client
+const client = new pg.Client(process.env.DATABASE_URL);
+
 // Setup application
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -21,22 +24,32 @@ app.get('/trails', handleTrails)
 app.use('*', notFoundHandler);
 
 // Handlers
-function handleLocation(req, res){
+function handleLocation(req, res) {
     let city = req.query.city;
     let key = process.env.GEOCODE_API_KEY;
-    
-    const URL = `https://us1.locationiq.com/v1/search.php/?key=${key}&q=${city}&format=json`;
-    superagent.get(URL)
-        .then(data => {
-            let location = new Location(data.body[0], city);
-            res.status(200).json(location);
+
+    //Check the Cache
+    const sqlQuery = `SELECT * FROM location WHERE search_query=$1`;
+    client.query(sqlQuery, [city])
+        .then(result => {
+            if (result.rowCount) { // use cached data
+                res.status(200).json(result.rows[0]);
+
+            } else { // use locationid data
+                const URL = `https://us1.locationiq.com/v1/search.php/?key=${key}&q=${city}&format=json`;
+                superagent.get(URL)
+                    .then(data => {
+                        let loc = new Location(data.body[0], city);
+                        const sqlInsert = `INSERT INTO location (search_query, formatted_query, latitude, longitude) VALUES ($1,$2,$3,$4)`;
+                        client.query(sqlInsert, [loc.search_query, loc.formatted_query, loc.latitude, loc.longitude])
+                            .then(results => res.status(200).json(loc));
+                    });
+            };
         })
-        .catch(error => {
-            errorHandler();
-        })
+        .catch(error => errorHandler(req, res, error));
 };
 
-function handleWeather(req, res){
+function handleWeather(req, res) {
     let lat = req.query.latitude;
     let lon = req.query.longitude;
     let key = process.env.WEATHER_API_KEY;
@@ -49,11 +62,11 @@ function handleWeather(req, res){
             res.status(200).send(weather);
         })
         .catch(error => {
-            errorHandler(req, res);
+            errorHandler(req, res, error);
         });
 };
 
-function handleTrails(req, res){
+function handleTrails(req, res) {
     let lat = req.query.latitude;
     let lon = req.query.longitude;
     let key = process.env.TRAIL_API_KEY;
@@ -66,32 +79,33 @@ function handleTrails(req, res){
             res.status(200).send(trails);
         })
         .catch(error => {
-            errorHandler();
+            errorHandler(req, res, error);
         })
 };
 
-function notFoundHandler(req, res){
+function notFoundHandler(req, res) {
     res.status(404).send('Not Found');
 };
 
-function errorHandler(req, res){
+function errorHandler(req, res, err) {
+    console.log('ERROR:', err)
     res.status(500).send("Sorry, something went wrong");
 };
 
 // Constructors
-function Location(obj, query){
+function Location(obj, query) {
     this.search_query = query;
     this.formatted_query = obj.display_name;
     this.latitude = obj.lat;
     this.longitude = obj.lon;
 };
 
-function Weather(obj){
+function Weather(obj) {
     this.forecast = obj.weather.description;
     this.time = new Date(obj.valid_date).toDateString();
 };
 
-function Trail(obj){
+function Trail(obj) {
     this.name = obj.name;
     this.location = obj.location;
     this.length = obj.length;
@@ -104,7 +118,14 @@ function Trail(obj){
     this.condition_time = new Date(obj.conditionDate).toLocaleTimeString();
 };
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server now listening on port ${PORT}`);
-});
+// Connect to DB and start server
+client.connect()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server now listening on port ${PORT}`);
+        });
+
+    })
+    .catch(err => {
+        console.log('ERROR:', err);
+    })
