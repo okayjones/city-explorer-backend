@@ -98,3 +98,29 @@ Estimate of time needed to complete: 1hr
 Start time: 2:30pm  
 Finish time: 3pm  
 Actual time needed to complete: 30m
+
+## Lab 3
+
+Number and name of feature: #1 - Database  
+Estimate of time needed to complete: 1hr  
+Start time: 9:00am  
+Finish time: 10:00am  
+Actual time needed to complete: 1hr
+
+Number and name of feature: #2 - Server
+Estimate of time needed to complete: 1hr
+Start time: 2:00pm
+Finish time: 4:00pm
+Actual time needed to complete: 2hr
+
+Number and name of feature:  
+Estimate of time needed to complete:  
+Start time:
+Finish time:
+Actual time needed to complete:
+
+Number and name of feature:  
+Estimate of time needed to complete:  
+Start time:
+Finish time:
+Actual time needed to complete:
