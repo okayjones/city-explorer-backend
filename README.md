@@ -130,11 +130,11 @@ Actual time needed to complete: 1hr
 Number and name of feature: #2 - Yelp
 Estimate of time needed to complete: 1hr
 Start time: 2:15pm
-Finish time:
-Actual time needed to complete:
+Finish time: 3:00pm
+Actual time needed to complete: 45m
 
 Number and name of feature: #3 - Pagination
-Estimate of time needed to complete:
-Start time:
-Finish time:
-Actual time needed to complete:
+Estimate of time needed to complete: 1hr
+Start time: 3pm
+Finish time: 3:10pm
+Actual time needed to complete: 10m

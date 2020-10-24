@@ -105,11 +105,15 @@ function handleMovies(req, res) {
 }
 
 function handleYelp(req, res) {
-    const API = 'https://api.yelp.com/v3/businesses/search'
+    const API = 'https://api.yelp.com/v3/businesses/search';
+    const numResults = 5;
+    const page = req.query.page || 1;
     const queryParams = {
         term: 'restaurants',
         latitude: req.query.latitude,
-        longitude: req.query.longitude
+        longitude: req.query.longitude,
+        limit: numResults,
+        offset: ((page - 1) * numResults + 1)
     };
 
     superagent.get(API)
