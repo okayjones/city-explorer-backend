@@ -128,8 +128,8 @@ Finish time: 2:00pm
 Actual time needed to complete: 1hr
 
 Number and name of feature: #2 - Yelp
-Estimate of time needed to complete:
-Start time:
+Estimate of time needed to complete: 1hr
+Start time: 2:15pm
 Finish time:
 Actual time needed to complete:
 

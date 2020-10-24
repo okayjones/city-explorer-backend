@@ -22,6 +22,7 @@ app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
 app.get('/trails', handleTrails);
 app.get('/movies', handleMovies);
+app.get('/yelp', handleYelp);
 app.use('*', notFoundHandler);
 
 // Handlers
@@ -84,21 +85,40 @@ function handleTrails(req, res) {
 };
 
 function handleMovies(req, res) {
-    const search = req.query.search_query;
-    const key = process.env.MOVIE_API_KEY;
-    const imgBaseUrl = `https://image.tmdb.org/t/p/w500`;
-    const API = `https://api.themoviedb.org/3/search/movie/`
+    const imgBaseUrl = 'https://image.tmdb.org/t/p/w500';
+    const API = 'https://api.themoviedb.org/3/search/movie/'
     const queryParams = {
-        api_key: key,
+        api_key: process.env.MOVIE_API_KEY,
         language: 'en-US',
-        query: search,
+        query: req.query.search_query,
         page: 1,
         include_adult: false
     };
 
     superagent.get(API)
         .query(queryParams)
-        .then(data => res.status(200).send(data.body.results.map(movie => new Movie(movie, imgBaseUrl))))
+        .then(data => {
+            let movies = data.body.results.map(movie => new Movie(movie, imgBaseUrl));
+            res.status(200).send(movies);
+        })
+        .catch(error => errorHandler(req, res, error));
+}
+
+function handleYelp(req, res) {
+    const API = 'https://api.yelp.com/v3/businesses/search'
+    const queryParams = {
+        term: 'restaurants',
+        latitude: req.query.latitude,
+        longitude: req.query.longitude
+    };
+
+    superagent.get(API)
+        .auth(process.env.YELP_API_KEY, { type: 'bearer' })
+        .query(queryParams)
+        .then(data => {
+            let restaurants = data.body.businesses.map(place => new Restaurant(place));;
+            res.status(200).send(restaurants);
+        })
         .catch(error => errorHandler(req, res, error));
 }
 
@@ -147,14 +167,15 @@ function Movie(obj, imgBaseUrl) {
     this.released_on = obj.release_date;
 };
 
+function Restaurant(obj) {
+    this.name = obj.name;
+    this.image_url = obj.image_url;
+    this.price = obj.price;
+    this.rating = obj.rating;
+    this.url = obj.url;
+};
+
 // Connect to DB and start server
 client.connect()
-    .then(() => {
-        app.listen(PORT, () => {
-            console.log(`Server now listening on port ${PORT}`);
-        });
-
-    })
-    .catch(err => {
-        console.log('ERROR:', err);
-    })
+    .then(() => app.listen(PORT, () => console.log(`Server now listening on port ${PORT}`)))
+    .catch(err => console.log('ERROR:', err));
