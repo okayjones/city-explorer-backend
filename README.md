@@ -107,34 +107,34 @@ Start time: 9:00am
 Finish time: 10:00am  
 Actual time needed to complete: 1hr
 
-Number and name of feature: #2 - Server
-Estimate of time needed to complete: 1hr
-Start time: 2:00pm
-Finish time: 4:00pm
-Actual time needed to complete: 2hr
+Number and name of feature: #2 - Server  
+Estimate of time needed to complete: 1hr  
+Start time: 2:00pm  
+Finish time: 4:00pm  
+Actual time needed to complete: 2hr  
 
-Number and name of feature:  #3 - Deploy
-Estimate of time needed to complete: 15m
-Start time: 4:00pm
-Finish time: 4:15pm
-Actual time needed to complete: 15m
+Number and name of feature:  #3 - Deploy  
+Estimate of time needed to complete: 15m  
+Start time: 4:00pm  
+Finish time: 4:15pm  
+Actual time needed to complete: 15m  
 
 ## Lab 09
 
 Number and name of feature: #1 - Movies  
 Estimate of time needed to complete: 1hr  
 Start time: 1:00pm  
-Finish time: 2:00pm
-Actual time needed to complete: 1hr
+Finish time: 2:00pm  
+Actual time needed to complete: 1hr  
 
-Number and name of feature: #2 - Yelp
-Estimate of time needed to complete: 1hr
-Start time: 2:15pm
-Finish time: 3:00pm
-Actual time needed to complete: 45m
+Number and name of feature: #2 - Yelp  
+Estimate of time needed to complete: 1hr  
+Start time: 2:15pm  
+Finish time: 3:00pm  
+Actual time needed to complete: 45m  
 
-Number and name of feature: #3 - Pagination
-Estimate of time needed to complete: 1hr
-Start time: 3pm
-Finish time: 3:10pm
-Actual time needed to complete: 10m
+Number and name of feature: #3 - Pagination  
+Estimate of time needed to complete: 1hr  
+Start time: 3pm  
+Finish time: 3:10pm  
+Actual time needed to complete: 10m  
