@@ -27,61 +27,67 @@ app.use('*', notFoundHandler);
 
 // Handlers
 function handleLocation(req, res) {
-    let city = req.query.city;
-    let key = process.env.GEOCODE_API_KEY;
-
-    //Check the Cache
+    const city = req.query.city;
+    const URL = 'https://us1.locationiq.com/v1/search.php/';
     const sqlQuery = `SELECT * FROM location WHERE search_query=$1`;
+    const sqlInsert = `INSERT INTO location (search_query, formatted_query, latitude, longitude) VALUES ($1,$2,$3,$4)`;
+    const queryParams = {
+        key: process.env.GEOCODE_API_KEY,
+        q: city,
+        format: 'json'
+    };
+
     client.query(sqlQuery, [city])
         .then(result => {
-            if (result.rowCount) { // use cached data
-                res.status(200).json(result.rows[0]);
-
-            } else { // use locationid data
-                const URL = `https://us1.locationiq.com/v1/search.php/?key=${key}&q=${city}&format=json`;
-                superagent.get(URL).then(data => {
-                    let loc = new Location(data.body[0], city);
-                    const sqlInsert = `INSERT INTO location (search_query, formatted_query, latitude, longitude) VALUES ($1,$2,$3,$4)`;
-                    client.query(sqlInsert, [loc.search_query, loc.formatted_query, loc.latitude, loc.longitude])
-                        .then(results => res.status(200).json(loc));
-                });
+            if (result.rowCount) {
+                res.status(200).json(result.rows[0])
+            }
+            else {
+                superagent.get(URL)
+                    .query(queryParams)
+                    .then(data => {
+                        let loc = new Location(data.body[0], city);
+                        client.query(sqlInsert, [loc.search_query, loc.formatted_query, loc.latitude, loc.longitude])
+                            .then(results => res.status(200).json(loc));
+                    });
             };
         })
         .catch(error => errorHandler(req, res, error));
 };
 
 function handleWeather(req, res) {
-    let lat = req.query.latitude;
-    let lon = req.query.longitude;
-    let key = process.env.WEATHER_API_KEY;
-
-    const URL = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&days=8&key=${key}`;
+    const URL = 'https://api.weatherbit.io/v2.0/forecast/daily';
+    const queryParams = {
+        lat: req.query.latitude,
+        lon: req.query.longitude,
+        key: process.env.WEATHER_API_KEY
+    };
 
     superagent.get(URL)
+        .query(queryParams)
         .then(data => {
             let weather = data.body.data.map(day => new Weather(day));
             res.status(200).send(weather);
         })
-        .catch(error => {
-            errorHandler(req, res, error);
-        });
+        .catch(error => errorHandler(req, res, error));
 };
 
 function handleTrails(req, res) {
-    let lat = req.query.latitude;
-    let lon = req.query.longitude;
-    let key = process.env.TRAIL_API_KEY;
-
-    const URL = `https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lon}&maxDistance=10&key=${key}`;
+    const URL = 'https://www.hikingproject.com/data/get-trails';
+    const queryParams = {
+        lat: req.query.latitude,
+        lon: req.query.longitude,
+        maxDistance: 10,
+        key: process.env.TRAIL_API_KEY
+    };
 
     superagent.get(URL)
+        .query(queryParams)
         .then(data => {
             let trails = data.body.trails.map(trail => new Trail(trail));
             res.status(200).send(trails);
         })
-        .catch(error => {
-            errorHandler(req, res, error);
-        })
+        .catch(error => errorHandler(req, res, error));
 };
 
 function handleMovies(req, res) {
