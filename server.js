@@ -86,7 +86,7 @@ function handleTrails(req, res) {
 function handleMovies(req, res) {
     const search = req.query.search_query;
     const key = process.env.MOVIE_API_KEY;
-    const imgBaseUrl = `https://image.tmdb.org/t/p/w500/`;
+    const imgBaseUrl = `https://image.tmdb.org/t/p/w500`;
     const API = `https://api.themoviedb.org/3/search/movie/`
     const queryParams = {
         api_key: key,
