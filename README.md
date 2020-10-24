@@ -47,7 +47,7 @@ Credit to:
 
 ## Feature Log
 
-### Lab 1
+### Lab 06
 
 Number and name of feature: #1 - Repo Setup  
 Estimate of time needed to complete: 30m  
@@ -73,7 +73,7 @@ Start time: 6pm
 Finish time: 6:47pm  
 Actual time needed to complete: ~45m  
 
-## Lab 2
+## Lab 07
 
 Number and name of feature: #1 - Data formatting  
 Estimate of time needed to complete: 15m  
@@ -99,7 +99,7 @@ Start time: 2:30pm
 Finish time: 3pm  
 Actual time needed to complete: 30m
 
-## Lab 3
+## Lab 08
 
 Number and name of feature: #1 - Database  
 Estimate of time needed to complete: 1hr  
@@ -113,14 +113,28 @@ Start time: 2:00pm
 Finish time: 4:00pm
 Actual time needed to complete: 2hr
 
-Number and name of feature:  
-Estimate of time needed to complete:  
+Number and name of feature:  #3 - Deploy
+Estimate of time needed to complete: 15m
+Start time: 4:00pm
+Finish time: 4:15pm
+Actual time needed to complete: 15m
+
+## Lab 09
+
+Number and name of feature: #1 - Movies  
+Estimate of time needed to complete: 1hr  
+Start time: 1:00pm  
+Finish time: 2:00pm
+Actual time needed to complete: 1hr
+
+Number and name of feature: #2 - Yelp
+Estimate of time needed to complete:
 Start time:
 Finish time:
 Actual time needed to complete:
 
-Number and name of feature:  
-Estimate of time needed to complete:  
+Number and name of feature: #3 - Pagination
+Estimate of time needed to complete:
 Start time:
 Finish time:
 Actual time needed to complete:
