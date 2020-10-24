@@ -20,7 +20,8 @@ app.use(cors());
 // Routes
 app.get('/location', handleLocation);
 app.get('/weather', handleWeather);
-app.get('/trails', handleTrails)
+app.get('/trails', handleTrails);
+app.get('/movies', handleMovies);
 app.use('*', notFoundHandler);
 
 // Handlers
@@ -37,13 +38,12 @@ function handleLocation(req, res) {
 
             } else { // use locationid data
                 const URL = `https://us1.locationiq.com/v1/search.php/?key=${key}&q=${city}&format=json`;
-                superagent.get(URL)
-                    .then(data => {
-                        let loc = new Location(data.body[0], city);
-                        const sqlInsert = `INSERT INTO location (search_query, formatted_query, latitude, longitude) VALUES ($1,$2,$3,$4)`;
-                        client.query(sqlInsert, [loc.search_query, loc.formatted_query, loc.latitude, loc.longitude])
-                            .then(results => res.status(200).json(loc));
-                    });
+                superagent.get(URL).then(data => {
+                    let loc = new Location(data.body[0], city);
+                    const sqlInsert = `INSERT INTO location (search_query, formatted_query, latitude, longitude) VALUES ($1,$2,$3,$4)`;
+                    client.query(sqlInsert, [loc.search_query, loc.formatted_query, loc.latitude, loc.longitude])
+                        .then(results => res.status(200).json(loc));
+                });
             };
         })
         .catch(error => errorHandler(req, res, error));
@@ -83,6 +83,25 @@ function handleTrails(req, res) {
         })
 };
 
+function handleMovies(req, res) {
+    const search = req.query.search_query;
+    const key = process.env.MOVIE_API_KEY;
+    const imgBaseUrl = `https://image.tmdb.org/t/p/w500/`;
+    const API = `https://api.themoviedb.org/3/search/movie/`
+    const queryParams = {
+        api_key: key,
+        language: 'en-US',
+        query: search,
+        page: 1,
+        include_adult: false
+    };
+
+    superagent.get(API)
+        .query(queryParams)
+        .then(data => res.status(200).send(data.body.results.map(movie => new Movie(movie, imgBaseUrl))))
+        .catch(error => errorHandler(req, res, error));
+}
+
 function notFoundHandler(req, res) {
     res.status(404).send('Not Found');
 };
@@ -116,6 +135,16 @@ function Trail(obj) {
     this.conditions = obj.conditionStatus;
     this.condition_date = new Date(obj.conditionDate).toDateString();
     this.condition_time = new Date(obj.conditionDate).toLocaleTimeString();
+};
+
+function Movie(obj, imgBaseUrl) {
+    this.title = obj.title;
+    this.overview = obj.overview;
+    this.average_votes = obj.vote_average;
+    this.total_votes = obj.vote_count; 
+    this.image_url = (obj.poster_path) ? `${imgBaseUrl}${obj.poster_path}` : undefined;
+    this.popularity = obj.popularity;
+    this.released_on = obj.release_date;
 };
 
 // Connect to DB and start server
